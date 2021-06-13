@@ -20,11 +20,15 @@ from PIL import Image
 import csv
 warnings.filterwarnings("ignore")
 transform = transforms.Compose([transforms.ToTensor()])
+
+# define the path of data set
 predict_test_dir = 'dataset/predict_test/'
 train_img_dir = 'dataset/train_img/'
 test__img_dir = 'dataset/test_img/'
 train_label_dir = 'dataset/train_label/'
 test_label_dir = 'dataset/test_label/'
+
+# use ij to evaluate the performance by Vrand and Vinfo. These are the scripts
 ij = imagej.init('Fiji.app')
 
 Language_extension = "BeanShell"
@@ -54,10 +58,8 @@ VInfo = maxScore;
 """
 
 
+# evaluate function, input: image path and label path, output: two scores
 def evl(image_path, label_path):
-    # global macroVRand
-    # global macroVInfo
-
     reg1 = re.compile('AAAAA')
     macror = reg1.sub(label_path, macroVRand)
     macroi = reg1.sub(label_path, macroVInfo)
@@ -74,12 +76,14 @@ def evl(image_path, label_path):
     return VRand, VInfo
 
 
-# #%%
+# evaluate all test images
 def evl_all(umodel):
+    # define test dataset
     test_set = ISBIDataset(test__img_dir, test_label_dir, transforms=transform)
     loader = DataLoader(test_set, batch_size=1, shuffle=False)
     vrand_list = []
     vinfo_list = []
+    #predict
     for index, (img, label) in enumerate(loader):
         predict_img = umodel.predict(img[0])
         predict_img_name = predict_test_dir + str(index) + '.png'
@@ -94,22 +98,29 @@ def evl_all(umodel):
         vrand, vinfo = evl(predict_img_name, label_img_name)
         vrand_list.append(vrand)
         vinfo_list.append(vinfo)
+    # return the mean scores of all test images
     return np.mean(vrand_list), np.mean(vinfo_list)
 
 
+# train function, batch_size, # epoch, learning rate can be adjusted.
 def train(batch_size, n_epochs, learning_rate):
+    #define train dataset
     train_set = ISBIDataset(train_img_dir,
                             train_label_dir,
                             transforms=transform)
+    #define model
     umodel = Unet()
     umodel.cuda()
+    #define loss function
     criterion = nn.BCEWithLogitsLoss()
+    #define optimizer
     optimizer = optim.Adam(umodel.parameters(), lr=learning_rate)
 
     loss_history = []
 
     loader = DataLoader(train_set, batch_size=batch_size, shuffle=False)
     max_score = 0
+    #begin to train
     for epoch in range(n_epochs):
         running_loss = 0.0
 
@@ -131,9 +142,11 @@ def train(batch_size, n_epochs, learning_rate):
             loss.backward()
             optimizer.step()
         vrand, vinfo = evl_all(umodel)
+        # save best model
         if (vrand > max_score):
             max_score = vrand
             torch.save(umodel.state_dict(), 'model/model.pkl')
+        #save the logs
         with open("log.csv", "a+", newline='') as file:
             csv_file = csv.writer(file)
             datas = [[
@@ -144,5 +157,6 @@ def train(batch_size, n_epochs, learning_rate):
             csv_file.writerows(datas)
         loss_history.append(running_loss / len(loader))
 
+
 if __name__ == '__main__':
-    train(batch_size=2, n_epochs=40, learning_rate=1e-3)
+    train(batch_size=2, n_epochs=40, learning_rate=3e-3)

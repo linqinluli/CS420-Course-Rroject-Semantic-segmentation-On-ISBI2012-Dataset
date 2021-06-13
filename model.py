@@ -7,7 +7,7 @@ from torch.autograd import Variable
 
 # In[2]:
 
-
+# define a convolution block, input: size of input channels, size of output channels
 class ConvBlock(nn.Module):
     def __init__(self, in_channels, out_channels):
         super(ConvBlock, self).__init__()
@@ -89,6 +89,7 @@ class Unet(nn.Module):
             x = torch.from_numpy(x)
         x = Variable(x.unsqueeze(0).cuda())
         output = F.sigmoid(self(x)).data.cpu().squeeze()
+        # Binarize the output result
         thresh = 0.5
         output[output >= thresh] = 1
         output[output < thresh] = 0

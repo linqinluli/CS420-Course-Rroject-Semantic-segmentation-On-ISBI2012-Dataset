@@ -17,6 +17,7 @@ class ISBIDataset(Dataset):
         return len(self.img)
     
     def __getitem__(self, index):
+        # read images
         img = Image.open(self.img[index]).convert("L")
         label = Image.open(self.label[index]).convert("L")
         
