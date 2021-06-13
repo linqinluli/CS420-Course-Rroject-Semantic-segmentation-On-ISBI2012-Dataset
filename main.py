@@ -97,14 +97,14 @@ def evl_all(umodel):
     return np.mean(vrand_list), np.mean(vinfo_list)
 
 
-def train(batch_size, n_epochs):
+def train(batch_size, n_epochs, learning_rate):
     train_set = ISBIDataset(train_img_dir,
                             train_label_dir,
                             transforms=transform)
     umodel = Unet()
     umodel.cuda()
     criterion = nn.BCEWithLogitsLoss()
-    optimizer = optim.Adam(umodel.parameters(), lr=1e-3)
+    optimizer = optim.Adam(umodel.parameters(), lr=learning_rate)
 
     loss_history = []
 
@@ -145,4 +145,4 @@ def train(batch_size, n_epochs):
         loss_history.append(running_loss / len(loader))
 
 if __name__ == '__main__':
-    train(2, 40)
+    train(batch_size=2, n_epochs=40, learning_rate=1e-3)
