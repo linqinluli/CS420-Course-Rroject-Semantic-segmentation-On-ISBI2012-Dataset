@@ -36,6 +36,8 @@ The result is stored in the `log.csv` file.
 
 ### To Do:
 
-1. Model modification
-2. Parameters adjustment
-3. Data argumentation
+- [ ] Model modification 
+
+- [x] Parameters adjustment
+
+- [ ] Data argumentation

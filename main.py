@@ -159,4 +159,17 @@ def train(batch_size, n_epochs, learning_rate):
 
 
 if __name__ == '__main__':
-    train(batch_size=2, n_epochs=40, learning_rate=3e-3)
+    batch_size = 2
+    n_epochs = 40
+    learning_rate = 2e-3
+    with open("log.csv", "a+", newline='') as file:
+        csv_file = csv.writer(file)    
+        datas = [[
+            'batch_size', batch_size, 'n_epoch', n_epochs, 'learning rate',
+            learning_rate
+        ]]
+        print(datas)
+        csv_file.writerows(datas)
+    train(batch_size=batch_size,
+          n_epochs=n_epochs,
+          learning_rate=learning_rate)
