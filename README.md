@@ -33,3 +33,9 @@ The result is stored in the `log.csv` file.
 ### Current works:
 
 2021/6/13: adjust parameters, the best parameters are: batch size = 2, learning rate= 1e-3
+
+### To Do:
+
+1. Model modification
+2. Parameters adjustment
+3. Data argumentation
