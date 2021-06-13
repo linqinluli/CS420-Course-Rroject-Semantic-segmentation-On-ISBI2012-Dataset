@@ -24,3 +24,14 @@ python main.py
 
 The result is stored in the `log.csv` file.
 
+### Performance:
+
+| Time | Vrand  | Vinfo  |                  Remarks                  |
+| :--: | :----: | :----: | :---------------------------------------: |
+| 6/13 | 0.9731 | 0.9770 | Adjust parameters (Batch size=2, lr=1e-3) |
+|      |        |        |                                           |
+|      |        |        |                                           |
+
+### Current works:
+
+2021/6/13: adjust parameters, the best parameters are: batch size = 2, learning rate= 1e-3

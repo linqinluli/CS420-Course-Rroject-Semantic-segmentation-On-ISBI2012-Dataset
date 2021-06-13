@@ -1,4 +1,3 @@
-#%%
 import os
 from numpy.lib.function_base import append
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
@@ -17,7 +16,6 @@ import imagej
 import re
 from torch.autograd import Variable
 from torch.utils.data import DataLoader
-import torch.nn.functional as F
 from PIL import Image
 import csv
 warnings.filterwarnings("ignore")
@@ -146,7 +144,5 @@ def train(batch_size, n_epochs):
             csv_file.writerows(datas)
         loss_history.append(running_loss / len(loader))
 
-
-# %%
 if __name__ == '__main__':
-    train(2, 30)
+    train(2, 40)
