@@ -29,6 +29,7 @@ The result is stored in the `log.csv` file.
 | Time | Vrand  | Vinfo  |                  Remarks                  |
 | :--: | :----: | :----: | :---------------------------------------: |
 | 6/13 | 0.9820 | 0.9836 | Adjust parameters (Batch size=2, lr=1e-3) |
+| 6/14 | 0.9823 | 0.9837 | Adjust parameters (Batch size=2, lr=2e-3) |
 
 ### Current works:
 
