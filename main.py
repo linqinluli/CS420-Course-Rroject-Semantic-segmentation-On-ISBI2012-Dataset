@@ -119,7 +119,6 @@ def train(batch_size, n_epochs, learning_rate):
     loss_history = []
 
     loader = DataLoader(train_set, batch_size=batch_size, shuffle=False)
-    max_score = 0
     #begin to train
     for epoch in range(n_epochs):
         running_loss = 0.0
@@ -155,14 +154,16 @@ def train(batch_size, n_epochs, learning_rate):
             print(datas)
             csv_file.writerows(datas)
         loss_history.append(running_loss / len(loader))
+    umodel.load_state_dict(torch.load('model/model.pkl'))
+    eval(umodel)
 
 
 if __name__ == '__main__':
     batch_size = 2
     n_epochs = 60
-    learning_rate = 1e-3
+    learning_rate = 2e-3
     with open("log.csv", "a+", newline='') as file:
-        csv_file = csv.writer(file)    
+        csv_file = csv.writer(file)
         datas = [[
             'batch_size', batch_size, 'n_epoch', n_epochs, 'learning rate',
             learning_rate
