@@ -143,8 +143,7 @@ def train(batch_size, n_epochs, learning_rate):
             optimizer.step()
         vrand, vinfo = evl_all(umodel)
         # save best model
-        if (vrand > max_score):
-            max_score = vrand
+        if (vrand > 0.98):
             torch.save(umodel.state_dict(), 'model/model.pkl')
         #save the logs
         with open("log.csv", "a+", newline='') as file:
@@ -160,8 +159,8 @@ def train(batch_size, n_epochs, learning_rate):
 
 if __name__ == '__main__':
     batch_size = 2
-    n_epochs = 40
-    learning_rate = 2e-3
+    n_epochs = 60
+    learning_rate = 1e-3
     with open("log.csv", "a+", newline='') as file:
         csv_file = csv.writer(file)    
         datas = [[

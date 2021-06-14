@@ -41,3 +41,5 @@ The result is stored in the `log.csv` file.
 - [x] Parameters adjustment
 
 - [ ] Data argumentation
+
+- [ ] Change loss function
