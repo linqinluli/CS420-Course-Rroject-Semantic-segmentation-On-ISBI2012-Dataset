@@ -24,7 +24,7 @@ transform = transforms.Compose([transforms.ToTensor()])
 # define the path of data set
 predict_test_dir = 'dataset/predict_test/'
 train_img_dir = 'dataset/train_img/'
-test__img_dir = 'dataset/test_img/'
+test_img_dir = 'dataset/test_img/'
 train_label_dir = 'dataset/train_label/'
 test_label_dir = 'dataset/test_label/'
 
@@ -77,20 +77,29 @@ def evl(image_path, label_path):
 
 
 # evaluate all test images
-def evl_all(umodel):
+def evl_all(umodel, aug=False):
     # define test dataset
-    test_set = ISBIDataset(test__img_dir, test_label_dir, transforms=transform)
+    test_set = ISBIDataset(test_img_dir,
+                           test_label_dir,
+                           transforms=transform,
+                           aug=aug)
     loader = DataLoader(test_set, batch_size=1, shuffle=False)
     vrand_list = []
     vinfo_list = []
     #predict
+
     for index, (img, label) in enumerate(loader):
         predict_img = umodel.predict(img[0])
         predict_img_name = predict_test_dir + str(index) + '.png'
+
         label_img_name = test_label_dir + str(index) + '.png'
 
         predict_img = predict_img * 255
-        outputImg = Image.fromarray(predict_img)
+        # ignore edge
+        if (aug == True):
+            outputImg = predict_img[32:predict_img.shape[0] - 32,
+                                    32:predict_img.shape[0] - 32]
+        outputImg = Image.fromarray(outputImg)
 
         outputImg = outputImg.convert('L')
         outputImg.save(predict_img_name)
@@ -103,11 +112,12 @@ def evl_all(umodel):
 
 
 # train function, batch_size, # epoch, learning rate can be adjusted.
-def train(batch_size, n_epochs, learning_rate):
+def train(batch_size, n_epochs, learning_rate, aug):
     #define train dataset
     train_set = ISBIDataset(train_img_dir,
                             train_label_dir,
-                            transforms=transform)
+                            transforms=transform,
+                            aug=aug)
     #define model
     umodel = Unet()
     umodel.cuda()
@@ -140,7 +150,7 @@ def train(batch_size, n_epochs, learning_rate):
 
             loss.backward()
             optimizer.step()
-        vrand, vinfo = evl_all(umodel)
+        vrand, vinfo = evl_all(umodel, aug)
         # save best model
         if (vrand > 0.98):
             torch.save(umodel.state_dict(), 'model/model.pkl')
@@ -154,22 +164,22 @@ def train(batch_size, n_epochs, learning_rate):
             print(datas)
             csv_file.writerows(datas)
         loss_history.append(running_loss / len(loader))
-    umodel.load_state_dict(torch.load('model/model.pkl'))
-    eval(umodel)
 
 
 if __name__ == '__main__':
     batch_size = 2
     n_epochs = 60
-    learning_rate = 2e-3
+    learning_rate = 1e-3
+    aug = True
     with open("log.csv", "a+", newline='') as file:
         csv_file = csv.writer(file)
         datas = [[
-            'batch_size', batch_size, 'n_epoch', n_epochs, 'learning rate',
-            learning_rate
+            'data augmentation (edges)', 'batch_size', batch_size, 'n_epoch',
+            n_epochs, 'learning rate', learning_rate
         ]]
         print(datas)
         csv_file.writerows(datas)
     train(batch_size=batch_size,
           n_epochs=n_epochs,
-          learning_rate=learning_rate)
+          learning_rate=learning_rate,
+          aug=aug)

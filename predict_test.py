@@ -105,5 +105,6 @@ umodel = Unet()
 umodel = umodel.cuda()
 umodel.load_state_dict(torch.load('model/0.98model.pkl'))
 #%%
-evl_all(umodel)
+vrand, vinfo = evl_all(umodel)
+print('vrand = ', vrand, 'vinfo = ', vinfo)
 #%%

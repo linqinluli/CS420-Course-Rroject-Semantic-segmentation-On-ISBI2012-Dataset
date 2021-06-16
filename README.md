@@ -1,28 +1,34 @@
-# CS420-Course-Rroject
+# CS420-Course-Project
 
 ### File description:
 
---dataset: all the data
+- --`dataset`: all the data
 
---log: training logs
+- --`log`: training logs
 
---model: stored model
+- --`model`: stored model
 
---ISBIdataset.py: dataset class
+- --`ISBIdataset.py`: dataset class
 
---model.py: model class
+- --`model.py`: model class
 
---main.py: main file used for training and testing
+- --`main.py`: main file used for training and testing
+
+- --`predict_test.py`: used for predict test images, predict images are stored in `dataset/predict_test`
 
 ### Quick start:
 
 make sure you have installed all the packages.
 
 ```shell
-python main.py
+python main.py #used for train, parameters can be adjust in main.py file
 ```
 
 The result is stored in the `log.csv` file.
+
+```shell
+python predict_test.py #used for predict test images
+```
 
 ### Performance:
 
@@ -30,10 +36,23 @@ The result is stored in the `log.csv` file.
 | :--: | :----: | :----: | :---------------------------------------: |
 | 6/13 | 0.9820 | 0.9836 | Adjust parameters (Batch size=2, lr=1e-3) |
 | 6/14 | 0.9823 | 0.9837 | Adjust parameters (Batch size=2, lr=2e-3) |
+| 6/16 | 0.9716 | 0.9804 |             Data augmentation             |
 
-### Current works:
+### Work Logs:
 
-2021/6/13: adjust parameters, the best parameters are: batch size = 2, learning rate= 1e-3
+- 2021/6/13: adjust parameters, the best parameters are: batch size = 2, learning rate= 1e-3
+
+- 2021/6/14: adjust parameters
+
+- 2021/6/15: adjust parameters
+
+- 2021/6/16: data augmentation :  Use `cv2.copyMakeBorder()` to do boundary expansion image augmentation
+
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  ​																		Prepare for the exam, no more experiments.
+
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### To Do:
 
@@ -41,6 +60,6 @@ The result is stored in the `log.csv` file.
 
 - [x] Parameters adjustment
 
-- [ ] Data argumentation
+- [x] Data argumentation
 
 - [ ] Change loss function
