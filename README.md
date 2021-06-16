@@ -32,11 +32,11 @@ python predict_test.py #used for predict test images
 
 ### Performance:
 
-| Time | Vrand  | Vinfo  |                  Remarks                  |
-| :--: | :----: | :----: | :---------------------------------------: |
-| 6/13 | 0.9820 | 0.9836 | Adjust parameters (Batch size=2, lr=1e-3) |
-| 6/14 | 0.9823 | 0.9837 | Adjust parameters (Batch size=2, lr=2e-3) |
-| 6/16 | 0.9716 | 0.9804 |             Data augmentation             |
+| Time | Vrand  | Vinfo  |                    Remarks                    |
+| :--: | :----: | :----: | :-------------------------------------------: |
+| 6/13 | 0.9820 | 0.9836 |   Adjust parameters (Batch size=2, lr=1e-3)   |
+| 6/14 | 0.9823 | 0.9837 |   Adjust parameters (Batch size=2, lr=2e-3)   |
+| 6/16 | 0.9716 | 0.9804 | Data augmentation. No significant improvement |
 
 ### Work Logs:
 
@@ -46,7 +46,7 @@ python predict_test.py #used for predict test images
 
 - 2021/6/15: adjust parameters
 
-- 2021/6/16: data augmentation :  Use `cv2.copyMakeBorder()` to do boundary expansion image augmentation
+- 2021/6/16: data augmentation :  Use `cv2.copyMakeBorder()` to do boundary expansion image augmentation. No significant improvement
 
   -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
