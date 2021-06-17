@@ -39,9 +39,7 @@ python predict_test.py #used for predict test images
 | 6/16 | 0.9716 | 0.9804 | Data augmentation. No significant improvement |
 
 <center class="half">
-    <img src="dataset/test_img/0.png" width="200"/>
-    <img src="dataset/test_label/0.png" width="200"/>
-    <img src="dataset/predict_test_best/0.png" width="200"/>
+    <img src="dataset/test_img/0.png" width="200"/><img src="dataset/test_label/0.png" width="200"/><img src="dataset/predict_test_best/0.png" width="200"/>
 </center>
 
 The first image is one of the test image (`"0.png"`). The second one is the test label. And the last one is the predict of our model with best performance. You can see that the performance is better, only few details are missing or wrong.
