@@ -169,7 +169,7 @@ def train(batch_size, n_epochs, learning_rate, aug):
 if __name__ == '__main__':
     batch_size = 2
     n_epochs = 60
-    learning_rate = 1e-3
+    learning_rate = 1.6e-3
     aug = True
     with open("log.csv", "a+", newline='') as file:
         csv_file = csv.writer(file)
