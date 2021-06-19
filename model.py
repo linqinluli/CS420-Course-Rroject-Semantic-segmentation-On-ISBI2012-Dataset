@@ -84,7 +84,7 @@ class Unet(nn.Module):
         x = torch.cat([x, c1], 1)
         x = self.conv9(x)
         x = self.conv10(x)
-        x = self.fn(x)
+        # x = self.fn(x)
         return x
 
     def predict(self, x):
