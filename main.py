@@ -90,11 +90,14 @@ def evl_all(umodel, aug=False):
 
     for index, (img, label) in enumerate(loader):
         predict_img = umodel.predict(img[0])
+        print(predict_img.shape)
+        print(label.shape)
         predict_img_name = predict_test_dir + str(index) + '.png'
 
         label_img_name = test_label_dir + str(index) + '.png'
 
         predict_img = predict_img * 255
+        outputImg = predict_img
         # ignore edge
         if (aug == True):
             outputImg = predict_img[32:predict_img.shape[0] - 32,
@@ -155,7 +158,7 @@ def train(batch_size, n_epochs, learning_rate, aug):
         if (vrand > 0.98):
             torch.save(umodel.state_dict(), 'model/model.pkl')
         #save the logs
-        with open("log.csv", "a+", newline='') as file:
+        with open("fn_log.csv", "a+", newline='') as file:
             csv_file = csv.writer(file)
             datas = [[
                 'epoch:', epoch, 'vrand:', vrand, 'vinfo:', vinfo, 'loss',
@@ -169,8 +172,8 @@ def train(batch_size, n_epochs, learning_rate, aug):
 if __name__ == '__main__':
     batch_size = 2
     n_epochs = 60
-    learning_rate = 1.6e-3
-    aug = True
+    learning_rate = 2e-3
+    aug = False
     with open("log.csv", "a+", newline='') as file:
         csv_file = csv.writer(file)
         datas = [[

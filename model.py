@@ -59,6 +59,8 @@ class Unet(nn.Module):
 
         self.conv10 = nn.Conv2d(32, 1, 1)
 
+        self.fn = nn.Linear(512, 512)
+
     def forward(self, x):
         c1 = self.conv1(x)
         x = self.pool1(c1)
@@ -82,6 +84,7 @@ class Unet(nn.Module):
         x = torch.cat([x, c1], 1)
         x = self.conv9(x)
         x = self.conv10(x)
+        x = self.fn(x)
         return x
 
     def predict(self, x):

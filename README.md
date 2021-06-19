@@ -39,8 +39,12 @@ python predict_test.py #used for predict test images
 | 6/16 | 0.9716 | 0.9804 | Data augmentation. No significant improvement |
 
 <center class="half">
-    <img src="dataset/test_img/0.png" width="200"/><img src="dataset/test_label/0.png" width="200"/><img src="dataset/predict_test_best/0.png" width="200"/> </center>
-    
+    <img src="dataset/test_img/0.png" width="200"/>
+    <img src="dataset/test_label/0.png" width="200"/>
+    <img src="dataset/predict_test_best/0.png" width="200"/> 
+</center>
+
+
 The first image is one of the test image (`"0.png"`). The second one is the test label. And the last one is the predict of our model with best performance. You can see that the performance is better, only few details are missing or wrong.
 
 ### Work Logs:
@@ -56,22 +60,21 @@ The first image is one of the test image (`"0.png"`). The second one is the test
   Here is a sample (left image is the data after boundary expansion (576x576), middle one is the label after boundary(576x576) expansion, right one is the predict result (512x512) )
 
   <center class="half">
-      <img src="figure/img_aug.png" width="270"/>
-      <img src="figure/label_aug.png" width="270"/>
-      <img src="dataset/predict_test/0.png" width="270"/>
+      <img src="figure/img_aug.png" width="200"/>
+      <img src="figure/label_aug.png" width="200"/>
+      <img src="dataset/predict_test/0.png" width="200"/>
   </center>
-  
-  
-  
+- 2021/6/19: Try to modify the model. No significant improvement.
+
   -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  
+
   ​																		Prepare for the exam, no more experiments.
-  
+
   -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### To Do:
 
-- [ ] Model modification 
+- [x] Model modification 
 
 - [x] Parameters adjustment
 
