@@ -56,10 +56,18 @@ The first image is one of the test image (`"0.png"`). The second one is the test
 
 - 2021/6/16: data augmentation :  Use `cv2.copyMakeBorder()` to do boundary expansion image augmentation. No significant improvement.
 
+  Here is a sample (left image is the data after boundary expansion (576x576), middle one is the label after boundary(576x576) expansion, right one is the predict result (512x512) )
+
+  <center class="half">
+      <img src="figure/img_aug.png" width="270"/>
+      <img src="figure/label_aug.png" width="270"/>
+      <img src="dataset/predict_test/0.png" width="270"/>
+  </center>
   
-
+  
+  
   -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+  
   ​																		Prepare for the exam, no more experiments.
   
   -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
