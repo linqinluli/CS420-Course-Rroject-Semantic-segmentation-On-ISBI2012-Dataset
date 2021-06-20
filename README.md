@@ -39,15 +39,22 @@ python predict_test.py #used for predict test images
 | 6/16 | 0.9716 | 0.9804 | Data augmentation. No significant improvement  |
 | 6/19 | 0.9619 | 0.9730 | Model modification. No significant improvement |
 
-<center class="half">
+
+
+  <center class="half">
     <img src="dataset/test_img/0.png" width="200"/>
     <img src="dataset/test_label/0.png" width="200"/>
     <img src="dataset/predict_test_best/0.png" width="200"/> 
-</center>
-
-
-
+  </center>
 The first image is one of the test image (`"0.png"`). The second one is the test label. And the last one is the predict of our model with best performance. You can see that the performance is better, only few details are missing or wrong.
+
+The following are graphs of several training parameters.
+
+<center class="half">
+    <img src="figure/vrand.png" width="300"/>
+    <img src="figure/vinfo.png" width="300"/>
+    <img src="figure/loss.png" width="300"/>
+</center>
 
 ### Work Logs:
 
@@ -61,6 +68,8 @@ The first image is one of the test image (`"0.png"`). The second one is the test
 
   Here is a sample (left image is the data after boundary expansion (576x576), middle one is the label after boundary(576x576) expansion, right one is the predict result (512x512) )
 
+  
+  
   <center class="half">
       <img src="figure/img_aug.png" width="200"/>
       <img src="figure/label_aug.png" width="200"/>
@@ -81,7 +90,7 @@ The first image is one of the test image (`"0.png"`). The second one is the test
 
 ### To Do:
 
-- [x] Model modification 
+- [x] Model modification (still need more experiments)
 
 - [x] Parameters adjustment
 
