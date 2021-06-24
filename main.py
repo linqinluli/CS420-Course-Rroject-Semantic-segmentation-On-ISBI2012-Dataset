@@ -1,5 +1,7 @@
 import os
 from numpy.lib.function_base import append
+
+# allow scripts running
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 import torch
 import torch.nn as nn
@@ -90,8 +92,10 @@ def evl_all(umodel, aug=False):
 
     for index, (img, label) in enumerate(loader):
         predict_img = umodel.predict(img[0])
-        print(predict_img.shape)
-        print(label.shape)
+        # print(predict_img.shape)
+        # print(label.shape)1
+
+        # prepare for the evalution data
         predict_img_name = predict_test_dir + str(index) + '.png'
 
         label_img_name = test_label_dir + str(index) + '.png'
@@ -147,6 +151,7 @@ def train(batch_size, n_epochs, learning_rate, aug):
             loss = criterion(output, label)
             running_loss += loss.item()
 
+            # print log every 5 batch
             if (batch % 5) == 4:
                 print('\tBatch : {}/{}\tLoss : {:.4f}'.format(
                     batch + 1, len(loader), loss.item()))
@@ -155,6 +160,7 @@ def train(batch_size, n_epochs, learning_rate, aug):
             optimizer.step()
         vrand, vinfo = evl_all(umodel, aug)
         # save best model
+        # the best scores in our prj is 0.98, so we set it as 0.98
         if (vrand > 0.98):
             torch.save(umodel.state_dict(), 'model/model.pkl')
         #save the logs
@@ -170,6 +176,7 @@ def train(batch_size, n_epochs, learning_rate, aug):
 
 
 if __name__ == '__main__':
+    #parameters initialization
     batch_size = 2
     n_epochs = 60
     learning_rate = 2e-3

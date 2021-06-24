@@ -35,6 +35,7 @@ class ConvBlock(nn.Module):
 class Unet(nn.Module):
     def __init__(self):
         super(Unet, self).__init__()
+        
         self.pool1 = nn.MaxPool2d(kernel_size=2)
         self.pool2 = nn.MaxPool2d(kernel_size=2)
         self.pool3 = nn.MaxPool2d(kernel_size=2)

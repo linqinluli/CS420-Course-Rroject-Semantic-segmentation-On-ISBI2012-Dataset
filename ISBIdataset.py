@@ -7,6 +7,7 @@ import cv2
 class ISBIDataset(Dataset):
     
     def __init__(self, img_path, label_path, transforms=None, aug=False):
+        # load file names
         img_list = sorted(glob.glob(img_path+'*.png'))
         label_list = sorted(glob.glob(label_path+'*.png'))
         self.img = img_list
@@ -22,6 +23,7 @@ class ISBIDataset(Dataset):
         img = Image.open(self.img[index]).convert("L")
         label = Image.open(self.label[index]).convert("L")
         
+        # images->nparray
         img = np.asarray(img)
         label = np.asarray(label)
         # data augmentation
@@ -29,6 +31,7 @@ class ISBIDataset(Dataset):
             img = cv2.copyMakeBorder(img,32,32,32,32,cv2.BORDER_REFLECT)
             label = cv2.copyMakeBorder(label,32,32,32,32,cv2.BORDER_REFLECT)
 
+        # transform ot tensor
         if self.transforms:
             img = self.transforms(img)
             label = self.transforms(label)
